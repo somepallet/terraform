@@ -12,12 +12,15 @@ def main():
     current_repo = os.getcwd() + "/sample-service"
     aws_region = 'us-east-1'
     service_name = "sample-service-ecr"
-    Repo.clone_from('https://github.com/CitrineInformatics/sample-service.git', current_repo)
+    git_url = input("Please enter git url (leaving this blank & pressing enter will default to the original "
+                    "sample-service repo)")
+    docker_tag = input("Please enter a docker tag: ")
 
-    # builds docker image
-    docker_srv = docker.from_env()
-    image, build_log = docker_srv.images.build(
-        path=current_repo, tag=service_name, rm=True)
+    # clones git repo to working directory
+    if git_url == "":
+        Repo.clone_from('https://github.com/CitrineInformatics/sample-service.git', current_repo)
+    else:
+        Repo.clone_from(f"{git_url}", current_repo)
 
     # AWS ECR credentials
     ecr_client = boto3.client('ecr', region_name=aws_region)
@@ -30,13 +33,22 @@ def main():
     # gets ecr url
     ecr_url = ecr_credentials['proxyEndpoint'].replace("https://", "")
 
-    # tags image for AWS ECR
-    image.tag(f"{ecr_url}/{service_name}", tag='latest')
+    # builds docker images
+    docker_srv = docker.from_env()
+    image_one, build_log_one = docker_srv.images.build(
+        path=current_repo, tag=f"{ecr_url}/{service_name}", rm=True)
+
+
+    # tags images for AWS ECR
+    image_one.tag(f"{ecr_url}/{service_name}", tag='latest')
+    image_one.tag(f"{ecr_url}/{service_name}", tag=docker_tag)
 
     # pushes image to AWS ECR
     os.system(f"aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin {ecr_url}")
     os.system(f"docker image push {ecr_url}/{service_name}:latest")
+    os.system(f"docker image push {ecr_url}/{service_name}:{docker_tag}")
     os.system("kubectl rollout restart deployment microservice-deployment")
+    print("The Docker Image has been tagged, pushed to the ECR repo and the EKS-Cluster has been redeployed")
 
 
 def clean_up(path):
