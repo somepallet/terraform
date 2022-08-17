@@ -46,7 +46,7 @@ def main():
     os.system(f"docker image push {ecr_url}/{service_name}:latest")
     os.system(f"docker image push {ecr_url}/{service_name}:{docker_tag}")
     os.system("kubectl rollout restart deployment microservice-deployment")
-    print("The Docker Image has been tagged, pushed to the ECR repo and the EKS-Cluster has been redeployed")
+    print("****The Docker Image has been tagged, pushed to the ECR repo and the EKS-Cluster has been redeployed****")
 
 
 def clean_up(path):
