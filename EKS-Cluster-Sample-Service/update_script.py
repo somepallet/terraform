@@ -13,7 +13,7 @@ def main():
     aws_region = 'us-east-1'
     service_name = "sample-service-ecr"
     git_url = input("Please enter git url (leaving this blank & pressing enter will default to the original "
-                    "sample-service repo)")
+                    "sample-service repo): ")
     docker_tag = input("Please enter a docker tag: ")
 
     # clones git repo to working directory
