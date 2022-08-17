@@ -1,8 +1,6 @@
-import base64
 import os
 import boto3
 import docker
-import shutil
 from git import Repo
 
 
