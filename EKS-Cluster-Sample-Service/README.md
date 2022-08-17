@@ -4,7 +4,7 @@ This module provisions an EKS cluster in AWS with the following: VPC, private/pu
 
 Prerequisites Installed prior to deploy/update cluster:
 
-    - terraform, docker, git, python, aws cli/configure aws credentials to the default ~/.aws/credentials file, kubectl
+    - terraform, docker, git, python, aws cli/configure aws credentials to the default "~/.aws/credentials", kubectl
 
 
 
