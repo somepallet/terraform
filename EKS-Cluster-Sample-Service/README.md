@@ -11,8 +11,12 @@ Prerequisites Installed prior to deploy/update cluster:
 Instructions:
 
 To Deploy the sample-service into aws and get a working url:
-    - run "terraform init" "terraform plan" & "terraform apply -auto-approve" commands in the working directory "EKS-Cluster-Sample-Service" 
+
+    - "terraform init" "terraform plan" & "terraform apply -auto-approve" 
+    
+    run the above commands in the working directory "EKS-Cluster-Sample-Service" 
 
 To update the existing cluster with the latest sample-service commits:
+
     - run "python ./update_script.py"
 
