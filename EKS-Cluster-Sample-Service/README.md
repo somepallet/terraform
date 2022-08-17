@@ -20,3 +20,6 @@ To update the existing cluster with the latest sample-service commits:
 
     - run "python ./update_script.py"
 
+To destory the terraform stack:
+
+    - "terraform destroy"
