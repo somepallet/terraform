@@ -18,7 +18,7 @@ To Deploy the sample-service into aws and get a working url:
 
 To update the existing cluster with the latest sample-service commits:
 
-    - run "python ./update_script.py"
+    - run "python update_script.py"
 
 To destory the terraform stack:
 
