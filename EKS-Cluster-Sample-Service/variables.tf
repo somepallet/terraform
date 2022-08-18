@@ -14,6 +14,10 @@ variable "env" {
     description = "AWS environment tag"
 }
 
+variable "git_url" {
+    default = "https://github.com/CitrineInformatics/sample-service.git"
+    description = "git repo url"
+}
 ##If terraform doesn't pick up aws credentials##
 /*
 variable "access_key" {
