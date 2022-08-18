@@ -1,7 +1,7 @@
 ##Clones git repo to local
 resource "null_resource" "git_clone" {
   provisioner "local-exec" {
-    command = "git clone https://github.com/CitrineInformatics/sample-service.git"
+    command = "git clone ${var.git_url}"
   }
 }
 
